@@ -1,18 +1,33 @@
 import { Link } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { LogoutButton } from "./Logoutbuttom";
 
 export const Navbar = () => {
 
+	const { store } = useGlobalReducer();
+
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar navbar-light bg-dark">
 			<div className="container">
+				
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+					<span className="navbar-brand h1 text-white">
+						PRUEBA DE TOKEN
+					</span>
 				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
+
+				<div className="ms-auto">
+					{store.token ? (
+						<LogoutButton />
+					) : (
+						<Link to="/register">
+							<button className="btn btn-primary">
+								Registrate
+							</button>
+						</Link>
+					)}
 				</div>
+
 			</div>
 		</nav>
 	);
